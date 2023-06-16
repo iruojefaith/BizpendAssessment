@@ -3,6 +3,7 @@ import GalleryDisplay from "../Pages/GalleryCard";
 import Search from "../Pages/Search";
 
 
+
 interface Photo {
   id: number;
   title: string;
@@ -17,6 +18,7 @@ const Main: React.FC = () => {
   const [photos, setPhotos] = useState<Photo[]>([]);
 
 
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -26,6 +28,7 @@ const Main: React.FC = () => {
         setPhotos(data);
         setdisplayPhotos(data);
         setLoading(false);
+
       } catch (error) {
         console.log('Error:', error);
         setLoading(false);
@@ -55,6 +58,9 @@ const Main: React.FC = () => {
     }
     return title.slice(0, maxLength) + '...';
   };
+
+
+
 
   return (
     <div className='flex justify-center align-center '>
