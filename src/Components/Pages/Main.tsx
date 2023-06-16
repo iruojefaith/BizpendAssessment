@@ -7,6 +7,8 @@ interface Photo {
   id: number;
   title: string;
   url: string;
+  thumbnailUrl: string;
+  isFavorite: boolean;
 }
 
 const Main: React.FC = () => {
@@ -33,6 +35,8 @@ const Main: React.FC = () => {
     fetchData();
   }, []);
 
+
+   //this particular function is for search functionality
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoading(true);
     const val = e.target.value;
@@ -44,18 +48,25 @@ const Main: React.FC = () => {
   };
 
 
+  //this particular section is to reduce the word length of the title
+  const sliceTitle = (title: string, maxLength: number) => {
+    if (title.length <= maxLength) {
+      return title;
+    }
+    return title.slice(0, maxLength) + '...';
+  };
 
   return (
     <div className='flex justify-center align-center '>
       <div className='w-full '>
-        <div className='max-w-2xl mx-auto'>
+        <div className='max-w-2xl mx-auto my-6 '>
           <Search handleChange={handleChange}  />
         </div>
         <div className='relative flex flex-col min-w-0 break-words  w-full mb-6 shadow-lg rounded'>
           <div className='px-4 py-5 flex-auto'>
             <div className='tab-content tab-space'>
               <div className=''>
-                <GalleryDisplay  loading={loading} displayPhotos={displayPhotos} />
+                <GalleryDisplay  loading={loading} displayPhotos={displayPhotos} sliceTitle={sliceTitle}/>
               </div>
             </div>
           </div>

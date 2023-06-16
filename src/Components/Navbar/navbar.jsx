@@ -15,7 +15,7 @@ function NavBar() {
       <div className={click ? "main-container" : ""} onClick={() => Close()} />
       <nav className='navbar' onClick={(e) => e.stopPropagation()}>
         <div className='nav-container'>
-          <NavLink exact to='/' className='nav-logo'>
+          <NavLink exact to='/' className="nav-logo font-bold ">
             ImageGallery
           </NavLink>
           <ul className={click ? "nav-menu active" : "nav-menu"}>

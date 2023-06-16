@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./Components/Home/Home";
 import AddFavourite from "./Components/Pages/AddFavourite";
-import Description from './Components/Pages/Description';
+import ImageDetailPage from './Components/Pages/ImageDetailPage';
 import NavBar from './Components/Navbar/navbar';
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/addfavourite' element={<AddFavourite />} />
-        <Route path='/description' element={<Description />} />
+       <Route path="/image/:id" element={<ImageDetailPage />} />
       </Routes>
      </Router>
     </div>

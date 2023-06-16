@@ -24,7 +24,7 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 80px;
+  height: 90px;
   max-width: 1500px;
 }
 
@@ -38,7 +38,10 @@ body {
 }
 
 .nav-logo {
-  color: #f5b921;
+background: linear-gradient(to right, #f32170,
+                    #ff6b08, #cf23cf, #dfd155, #fff);
+            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
   align-items: center;
   margin-left: 20px;
   cursor: pointer;

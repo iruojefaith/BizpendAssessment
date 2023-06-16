@@ -83,7 +83,7 @@ img {
   box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
-  height: 20rem;
+  height: 15rem;
   position: relative;
   overflow: hidden;
 }
@@ -95,6 +95,7 @@ img {
   backdrop-filter: blur(54px);
   position: absolute;
   width: 100%;
+  height: 100px;
   bottom: 0;
 }
 .card_content_small{
