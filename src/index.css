@@ -20,7 +20,7 @@ body {
   font-weight: 400;
   letter-spacing: 0;
   padding: 1rem;
-  background: #fff;
+  background: #fff !important;
 }
 
 .main{

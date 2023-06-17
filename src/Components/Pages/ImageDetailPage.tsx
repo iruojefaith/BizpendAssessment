@@ -27,13 +27,13 @@ const ImageDetailsPage: React.FC = () => {
   }, [id]);
 
   if (!photo) {
-    return <p>Loading...</p>;
+    return <p className="text-[#282727d3] text-[2rem]">Loading...</p>;
   }
 
   return (
     <div className=' w-11/12 md:flex m-auto '>
     <div className='md:flex gap-6 mt-6 '>
-      <h2 className='text-white font-bold text-[2rem] place-content-center md:mt-28 '>{photo.title}</h2>
+      <h2 className='text-[#282727d3] font-bold text-[2rem] place-content-center md:mt-28 '>{photo.title}</h2>
       <img className="border-opacity-5 rounded-lg " src={photo.url} alt={photo.title} />
       <p>{photo.description}</p>
     </div></div>
