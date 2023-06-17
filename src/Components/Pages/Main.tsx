@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
 import GalleryDisplay from "../Pages/GalleryCard";
 import Search from "../Pages/Search";
-
-
-
 
 interface Photo {
   id: number;
@@ -18,26 +14,25 @@ const Main: React.FC = () => {
   const [displayPhotos, setdisplayPhotos] = useState<Photo[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [photos, setPhotos] = useState<Photo[]>([]);
-   const [favorites, setFavorites] = useState<Photo[]>([]);
-  const navigate = useNavigate();
-
-
+  const [favorites, setFavorites] = useState<Photo[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://jsonplaceholder.typicode.com/photos');
+        const response = await fetch(
+          "https://jsonplaceholder.typicode.com/photos"
+        );
         const data = await response.json();
         setPhotos(data);
         setdisplayPhotos(data);
         setLoading(false);
-         const photosWithFavorites = data.map((photo: Photo) => ({
+        const photosWithFavorites = data.map((photo: Photo) => ({
           ...photo,
           isFavorite: false,
         }));
         setPhotos(photosWithFavorites);
       } catch (error) {
-        console.log('Error:', error);
+        console.log("Error:", error);
         setLoading(false);
       }
     };
@@ -45,20 +40,14 @@ const Main: React.FC = () => {
     fetchData();
   }, []);
 
-    useEffect(() => {
-    const storedFavorites = localStorage.getItem('favorites');
+  useEffect(() => {
+    const storedFavorites = localStorage.getItem("favorites");
     if (storedFavorites) {
       setFavorites(JSON.parse(storedFavorites));
     }
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-  }, [favorites]);
 
-  const handlePhotoClick = (id: number) => {
-  navigate(`/image/${id}`);
-};
 
   const toggleFavorite = (id: number) => {
     setPhotos((prevPhotos) =>
@@ -73,7 +62,7 @@ const Main: React.FC = () => {
     setFavorites(updatedFavorites);
   }, [photos]);
 
-   //this particular function is for search functionality
+  //this particular function is for search functionality
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoading(true);
     const val = e.target.value;
@@ -84,27 +73,30 @@ const Main: React.FC = () => {
     setLoading(false);
   };
 
-
   //this particular section is to reduce the word length of the title
   const sliceTitle = (title: string, maxLength: number) => {
     if (title.length <= maxLength) {
       return title;
     }
-    return title.slice(0, maxLength) + '...';
+    return title.slice(0, maxLength) + "...";
   };
-
 
   return (
     <div className='flex justify-center align-center '>
       <div className='w-full '>
         <div className='max-w-2xl mx-auto my-6 '>
-          <Search handleChange={handleChange}  />
+          <Search handleChange={handleChange} />
         </div>
-        <div className='relative flex flex-col min-w-0 break-words  w-full mb-6 shadow-lg rounded'>
+        <div className='relative flex flex-col justify-center items-center min-w-0 break-words  w-full mb-6 shadow-lg rounded mx-auto'>
           <div className='px-4 py-5 flex-auto'>
             <div className='tab-content tab-space'>
               <div className=''>
-                <GalleryDisplay toggleFavorite={toggleFavorite} handlePhotoClick={handlePhotoClick} loading={loading} displayPhotos={displayPhotos} sliceTitle={sliceTitle} />
+                <GalleryDisplay
+                  toggleFavorite={toggleFavorite}
+                  loading={loading}
+                  displayPhotos={displayPhotos}
+                  sliceTitle={sliceTitle}
+                />
               </div>
             </div>
           </div>

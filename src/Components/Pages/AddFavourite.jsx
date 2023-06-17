@@ -1,30 +1,29 @@
-import React, { useState } from "react";
-import GalleryCard from "./GalleryCard";
+import React, { useEffect, useState } from "react";
+import ImageCard from "./ImageCard";
 
 const AddFavorite = () => {
-  const [photos, setPhotos] = useState([
-    { id: 1, title: "Photo 1", thumbnailUrl: "url", isFavorite: false },
-    { id: 2, title: "Photo 2", thumbnailUrl: "url", isFavorite: false },
-    { id: 3, title: "Photo 3", thumbnailUrl: "url", isFavorite: false },
-    // ... more photos
-  ]);
-
-  const handleFavorite = (id) => {
-    const updatedPhotos = photos.map((photo) => {
-      if (photo.id === id) {
-        return { ...photo, isFavorite: !photo.isFavorite };
-      }
-      return photo;
-    });
-
-    setPhotos(updatedPhotos);
+  const [photos, setPhotos] = useState([]);
+  const sliceTitle = (title, maxLength) => {
+    if (title.length <= maxLength) {
+      return title;
+    }
+    return title.slice(0, maxLength) + "...";
   };
+
+  useEffect(() => {
+    const allFavorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+    setPhotos(allFavorites);
+  }, []);
+
+  console.log({ photos });
 
   return (
     <div>
-      {photos.map((photo) => (
-        <GalleryCard key={photo.id} photo={photo} handleFavorite={handleFavorite} />
-      ))}
+      <li className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-[2rem]'>
+        {photos?.map((photo, key) => {
+          return <ImageCard key={key} sliceTitle={sliceTitle} photo={photo} />;
+        })}
+      </li>
     </div>
   );
 };
